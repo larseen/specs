@@ -1,6 +1,10 @@
 
 .ServiceStats {}
 
+.ServiceStatsContainers {
+  margin-left: 20px;
+}
+
 .ServiceStats table {
   font-size: 16px;
   color: #54585E;

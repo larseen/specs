@@ -4,7 +4,28 @@
   font-size: 16px;
 }
 
-.ServiceTaskDef table {}
+.ServiceTaskDef table {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border: 1px solid #e3e4e6;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.ServiceTaskDefName {
+  margin: 10px 0;
+}
+
+.ServiceTaskDefName a {
+  margin-left: 10px;
+}
+
 
 .ServiceTaskDef th {
   text-align: right;

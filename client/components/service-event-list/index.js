@@ -37,11 +37,11 @@ export default class ServiceEventList extends Component {
     const timestamp = moment(createdAt).fromNow();
     return (
       <li key={id} className={styles.ServiceEventListItem}>
+        <span className={styles['ServiceEventListItem-timestamp']}>
+          {timestamp}
+        </span>
         <span className={styles['ServiceEventListItem-message']}>
           {message}
-        </span>
-        <span className={styles['ServiceEventListItem-timestamp']}>
-          ({timestamp})
         </span>
       </li>
     );

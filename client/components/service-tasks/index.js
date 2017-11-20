@@ -8,7 +8,7 @@ const awsRegion = process.env.AWS_REGION
 
 const Task = ({ task, clusterName }) => {
   const [family, revision] = task.taskDefinitionArn.split('/');
-  const taskId = task.taskArn.split('/')[0];
+  const taskId = task.taskArn.split('/')[1];
 
   return (
     <ul className={styles.ServiceTask}>

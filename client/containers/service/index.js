@@ -13,6 +13,8 @@ import ServiceTasks from '../../components/service-tasks';
 import ServiceTaskDef from '../../components/service-task-def';
 import styles from './index.css';
 
+const awsRegion = process.env.AWS_REGION
+
 const activeLinkStyle = {
   borderBottomColor: '#fff',
   color: '#54585E',
@@ -29,11 +31,15 @@ export default class Service extends Component {
   }
 
   render() {
+    const { service, clusterName, tasks } = this.props;
+
     return (
       <div className={styles.Service}>
         <Sheet onClose={::this.closeSheet}>
-          <h1 tabIndex="-1" ref="heading">{this.props.service.serviceName}</h1>
-          <ServiceStats service={this.props.service} left={true} />
+          <a href={`https://${awsRegion}.console.aws.amazon.com/ecs/home?region=${awsRegion}#/clusters/${clusterName}/services/${service.serviceName}/details`}>
+            <h1 tabIndex="-1" ref="heading" className={styles.ServiceName}>{service.serviceName}</h1>
+          </a>
+          <ServiceStats service={service} left={true} />
           <Tabs handleSelect={::this.selectTab} selectedTab={this.state.tab} className={styles.ServiceTabs} activeLinkStyle={activeLinkStyle}>
             <nav className={styles['ServiceTabs-navigation']}>
               <ul>
@@ -57,18 +63,18 @@ export default class Service extends Component {
 
             <div className={styles['ServiceTabs-content']}>
               <TabContent for="events">
-                <ServiceEventList events={this.props.service.events} />
+                <ServiceEventList events={service.events} />
               </TabContent>
               <TabContent for="task_def">
                 <ServiceTaskDef
-                  family={this.props.service.task.family}
-                  revision={this.props.service.task.revision}
-                  definition={this.props.service.task.containerDefinitions[0]} />
+                  family={service.task.family}
+                  revision={service.task.revision}
+                  definitions={service.task.containerDefinitions} />
               </TabContent>
               <TabContent for="tasks">
                 <ServiceTasks
-                  clusterName={this.props.clusterName}
-                  tasks={this.props.tasks}
+                  clusterName={clusterName}
+                  tasks={tasks}
                 />
               </TabContent>
             </div>

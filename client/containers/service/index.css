@@ -1,4 +1,16 @@
 
+.ServiceName {
+  outline: none;
+}
+.ServiceName::before {
+  display: inline-block;
+  width: 30px;
+  margin-right: 10px;
+  height: 24px;
+  content: url('./icons.svg');
+}
+
+
 .Service {}
 
 .ServiceTabs {

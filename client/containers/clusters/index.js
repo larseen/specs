@@ -151,9 +151,10 @@ export default class ClustersContainer extends Component {
   componentDidMount() {
     request
     .get('/api/clusters')
-    .end(function(err, res) {
+    .end((err, res) => {
       if (err) {
-        return this.setState({ error: err.message });
+        const message = err.message || `Unable to fetch cluster information`;
+        return this.setState({ error: message });
       }
 
       const clusters = res.body;
@@ -162,7 +163,7 @@ export default class ClustersContainer extends Component {
       for (let i = 0; i < clusters.length; i++) {
         this.fetchServices(clusters[i]);
       }
-    }.bind(this));
+    });
   }
 
   /**
@@ -172,10 +173,10 @@ export default class ClustersContainer extends Component {
   fetchServices(cluster) {
     request
     .get(`/api/clusters/${cluster.clusterName}`)
-    .end(function(err, res) {
+    .end((err, res) => {
       if (err) {
-        err = err || new Error(`unable to fetch information on ${cluster.clusterName} (${res.status})`);
-        return this.setState({ error: err.message });
+        const message = err.message || `unable to fetch information on ${cluster.clusterName} (${res.status})`;
+        return this.setState({ error: message });
       }
 
       const { services } = this.state;
@@ -186,7 +187,7 @@ export default class ClustersContainer extends Component {
       res.body.forEach(service => {
         this.fetchTasks(cluster.clusterName, service.serviceName)
       })
-    }.bind(this));
+    });
   }
 
   /**
